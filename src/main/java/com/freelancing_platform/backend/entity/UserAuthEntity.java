@@ -1,25 +1,32 @@
 package com.freelancing_platform.backend.entity;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.*;
 
+
 @Entity
-@Table(name = "users_auth")
+@Table(name = "User_auth")
 
 public class UserAuthEntity {
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name="id")
+@Column(name="user_id")
 private Long id;
 
 @Column(name="username")
 private String username;
 
-@Column(name="emailId")
+@Column(name="email_id")
 private String emailID;
 
 @Column(name="password")
 private String password;
+
+@Column(name="roles")
+private String roles;
 
 public Long getId() {
 	return id;
@@ -51,6 +58,11 @@ public String getPassword() {
 
 public void setPassword(String password) {
 	this.password = password;
+}
+
+public Collection<? extends GrantedAuthority> roles() {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 

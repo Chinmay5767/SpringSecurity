@@ -1,0 +1,35 @@
+services:
+  backend_image: 
+    build: .
+    ports:
+      -  "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Chi@2002
+    depends_on: 
+      - database
+    networks:
+      - my-network
+    
+  database:
+    image: postgres 
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Chi@2002
+    networks:
+      - my-network
+    volumes:
+      - my-volume:/var/lib/postgresql/data
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  my-volume:
+      
+  
+    
+   

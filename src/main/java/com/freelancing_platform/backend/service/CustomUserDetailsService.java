@@ -1,5 +1,5 @@
 package com.freelancing_platform.backend.service;
-
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
@@ -22,10 +22,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 	 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
 	
-		UserAuthEntity LoginUser = (UserAuthEntity) userRepository.findByUserName(username);
-	 return new org.springframework.security.core.userdetails.User(LoginUser.getUsername(), LoginUser.getPassword(),
-			 List.of(new SimpleGrantedAuthority("ROLE_USER")));
+		UserAuthEntity LoginUser = userRepository.findByUsername(username);
+	 return new User(LoginUser.getUsername(), LoginUser.getPassword(),
+			 LoginUser.roles());
 	
 	}
 	 
